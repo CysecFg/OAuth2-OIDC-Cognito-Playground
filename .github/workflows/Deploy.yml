@@ -44,14 +44,6 @@ jobs:
 #         if: github.event_name == 'pull_request'
         run: terraform plan -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" -var "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}" -no-color -input=false -out=tfplan
         continue-on-error: true
-        
-      - name: Save state to artifact
-        id: state
-        uses: actions/upload-artifact@v2
-        with:
-          name: terraform-state
-          path: .terraform/terraform.tfstate
-          if-no-files-found: error
 
 #       - name: Update Pull Request
 #         uses: actions/github-script@v6
@@ -89,3 +81,12 @@ jobs:
       - name: Terraform Destroy
         if: ${{ steps.apply.outcome == 'failure' && steps.resources.outputs.resources != null }}
         run: terraform destroy -auto-approve
+        
+        
+      - name: Save state to artifact
+        id: state
+        uses: actions/upload-artifact@v2
+        with:
+          name: terraform-state
+          path: .terraform/terraform.tfstate
+          if-no-files-found: error
