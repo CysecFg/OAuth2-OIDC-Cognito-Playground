@@ -5,5 +5,5 @@ regions:
 account-blocklist:
 - "999999999999" # production
 
-# accounts:
-#   "000000000000": {} # aws-nuke-example
+accounts:
+  "${{ secrets.AWS_ACCOUNT_ID }}": {} # aws-nuke-example
