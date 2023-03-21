@@ -75,4 +75,9 @@ jobs:
 
       - name: Terraform Apply
 #         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false tfplan
+        id: apply
+        run: terraform apply -auto-approve -input=false tfplan || echo "terraform apply failed"
+        
+      - name: Terraform Destroy
+        if: ${{ steps.apply.outcome == 'failure' && steps.resources.outputs.resources != null }}
+        run: terraform destroy -auto-approve
