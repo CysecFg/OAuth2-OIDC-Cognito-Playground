@@ -1,7 +1,17 @@
+variable "github_token" {}
+variable "aws_secret_key" {}
+
+
 provider "aws" {
+  #profile = var.profile
+  region     = "eu-west-3"
+  access_key = "AKIAXSDDOO7SBNKBKBPO"
+  secret_key = "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"
+  #allowed_account_ids = [var.accountId]
 }
 
 data "aws_region" "current" {
+  
 }
 
 resource "random_id" "id" {
@@ -221,7 +231,7 @@ resource "aws_cognito_user_pool_client" "client" {
 
 data "external" "backend_build" {
   program = ["bash", "-c", <<EOT
-(npm ci) >&2 && echo "{\"dest\": \".\"}"
+(npm ci --no-bin-links) >&2 && echo "{\"dest\": \".\"}"
 EOT
   ]
   working_dir = "${path.module}/backend"
