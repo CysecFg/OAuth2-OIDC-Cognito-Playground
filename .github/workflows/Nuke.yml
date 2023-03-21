@@ -32,7 +32,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         run: |
-          nuke -c config/nuke-config.yml --access-key-id ${{ secrets.AWS_ACCESS_KEY_ID }} --secret-access-key ${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          nuke -c config/nuke-config.yml --access-key-id ${{ secrets.AWS_ACCESS_KEY }} --secret-access-key ${{ secrets.AWS_SECRET_KEY }} \
                --force --no-dry-run
                
        # --max-concurrent-regions 10 --max-concurrent-deletes 50 \
