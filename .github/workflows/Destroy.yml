@@ -2,14 +2,32 @@ name: Terraform Destroy
 
 on:
   workflow_dispatch:
+    inputs:
+      state_file:
+        description: 'Terraform state file artifact'
+        required: true
+
 
 jobs:
   terraform-destroy:
+    
     runs-on: ubuntu-latest
+    
+    env:
+      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      
     steps:
+    
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
+      - name: Download Terraform state artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: terraform-state
+          path: .terraform
+          
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -17,14 +35,34 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        
+        
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
 
-      - name: Terraform Plan
-        id: plan
-#         env:
-#           TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-#           TF_VAR_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-        run: terraform plan -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" -var "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}"  -destroy -out=tfplan
+      - name: Remove Terraform state
+        run: rm -rf .terraform
 
-      - name: Terraform Destroy
-        if: success() && github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve tfplan
+      - name: Cleanup artifacts
+        run: |
+          ls -l
+          rm -rf .github
+
+      - name: Save logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: terraform-logs
+          path: |
+            terraform-apply.log
+            terraform-destroy.log
+
+#       - name: Terraform Plan
+#         id: plan
+# #         env:
+# #           TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+# #           TF_VAR_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+#         run: terraform plan -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY }}" -var "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}"  -destroy -out=tfplan
+
+#       - name: Terraform Destroy
+#         if: success() && github.ref == 'refs/heads/main'
+#         run: terraform apply -auto-approve tfplan
