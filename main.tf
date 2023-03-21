@@ -1,12 +1,12 @@
-variable "github_token" {}
-variable "aws_secret_key" {}
+# variable "github_token" {}
+# variable "aws_secret_key" {}
 
 
 provider "aws" {
   #profile = var.profile
   region     = "eu-west-3"
-  access_key = "AKIAXSDDOO7SBNKBKBPO"
-  secret_key = "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"
+  access_key = "na"
+  secret_key = "na"
   #allowed_account_ids = [var.accountId]
 }
 
