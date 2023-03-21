@@ -21,9 +21,11 @@ jobs:
 
       - name: Install AWS Nuke
         run: |
-          curl -Lo nuke https://github.com/rebuy-de/aws-nuke/releases/latest/download/nuke-linux-amd64
+          wget -c https://github.com/rebuy-de/aws-nuke/releases/download/v2.21.2/aws-nuke-v2.21.2-linux-amd64.tar.gz
+          tar -xvf aws-nuke-v2.21.2-linux-amd64.tar.gz
+          mv aws-nuke-v2.21.2-linux-amd64 nuke
           chmod +x nuke
-        # sudo mv nuke /usr/local/bin
+          sudo mv nuke /usr/local/bin/nuke
 
       - name: Run AWS Nuke
         env:
