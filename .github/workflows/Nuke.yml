@@ -23,14 +23,14 @@ jobs:
         run: |
           curl -Lo nuke https://github.com/rebuy-de/aws-nuke/releases/latest/download/nuke-linux-amd64
           chmod +x nuke
-          sudo mv nuke /usr/local/bin
+        # sudo mv nuke /usr/local/bin
 
       - name: Run AWS Nuke
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         run: |
-          /usr/local/bin/nuke --access-key-id ${{ secrets.AWS_ACCESS_KEY_ID }} --secret-access-key ${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          nuke --access-key-id ${{ secrets.AWS_ACCESS_KEY_ID }} --secret-access-key ${{ secrets.AWS_SECRET_ACCESS_KEY }} \
                --force --no-dry-run --force-sleep 30 --max-concurrent-regions 10 --max-concurrent-deletes 50 \
                --excluded-regions us-east-1 --skip-resource-types '^(AWS|Reserved)::*' \
               
