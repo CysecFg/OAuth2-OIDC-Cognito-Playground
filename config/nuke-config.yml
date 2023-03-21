@@ -6,4 +6,5 @@ account-blocklist:
 - "999999999999" # production
 
 accounts:
-"${{ secrets.AWS_ACCOUNT_ID }}": {} # aws-nuke-example
+# "${{ secrets.AWS_ACCOUNT_ID }}": {} # aws-nuke-example
+"519899609060": {} # aws-nuke-example
