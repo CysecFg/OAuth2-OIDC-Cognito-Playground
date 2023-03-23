@@ -25,7 +25,7 @@ on:
   workflow_dispatch:
 
 
-name: Scan analyze workflow
+name: CONTRAST SAST 
 jobs:
   build-and-scan:
     permissions:
@@ -34,6 +34,7 @@ jobs:
         actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     runs-on: ubuntu-latest
     # check out project
+    environment: PRD
     steps:
     - uses: actions/checkout@v3
     # Since Contrast Scan is designed to run against your deployable artifact, the steps to build your artifact should go here.
