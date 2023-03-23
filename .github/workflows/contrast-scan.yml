@@ -12,17 +12,17 @@
 # All Contrast related account secrets should be configured as GitHub secrets to be passed as inputs to the Contrast Scan Action.
 # The required secrets are CONTRAST_API_KEY, CONTRAST_ORGANIZATION_ID and CONTRAST_AUTH_HEADER.
 
-# on:
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     # The branches below must be a subset of the branches above
-#     branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "main" ]
 #   schedule:
 #     - cron: '41 6 * * 6'
 
-on:
-  workflow_dispatch:
+# on:
+#   workflow_dispatch:
 
 
 name: CONTRAST SAST 
