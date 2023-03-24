@@ -1,0 +1,52 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  contrast:
+    name: Contrast Scan
+    uses: OAuth2-OIDC-Cognito-Playground/.github/workflows/contrast-scan.yml@main
+  
+  
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Job 2
+        stage: stageA
+        run: echo "Job 2"
+
+ job3:
+    runs-on: ubuntu-latest
+    needs: [job2]
+    steps:
+      - name: Job 3
+         stage: stageA
+        run: echo "Job 3"
+
+ job4:
+    runs-on: ubuntu-latest
+    needs: [job3]
+    steps:
+      - name: Job 4
+        stage: stageB
+        run: echo "Job 4"
+        
+  
+#   deploy:
+#     name: Deploy to PRD
+#     uses: OAuth2-OIDC-Cognito-Playground/.github/workflows/Deploy.yml@main
+    
+
+#   job5:
+#     runs-on: ubuntu-latest
+#     needs: [job1, job2]
+#     strategy:
+#       matrix:
+#         job-matrix: [1, 2, 3, 4, 5]
+#     steps:
+#       - name: Job 5
+#         run: echo "Job ${{ matrix.job-matrix }}"
