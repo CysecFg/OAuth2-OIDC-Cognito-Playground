@@ -9,7 +9,7 @@ on:
 jobs:
   contrast:
     name: Contrast Scan
-    uses: OAuth2-OIDC-Cognito-Playground/.github/workflows/contrast-scan.yml@main
+    uses: ./.github/workflows/contrast-scan.yml
   
   
   job2:
