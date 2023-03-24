@@ -16,23 +16,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Job 2
-        stage: stageA
         run: echo "Job 2"
 
- job3:
+  job3:
     runs-on: ubuntu-latest
     needs: [job2]
     steps:
       - name: Job 3
-         stage: stageA
         run: echo "Job 3"
 
- job4:
+  job4:
     runs-on: ubuntu-latest
     needs: [job3]
     steps:
       - name: Job 4
-        stage: stageB
         run: echo "Job 4"
         
   
