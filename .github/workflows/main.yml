@@ -27,7 +27,7 @@ jobs:
 
   job4:
     runs-on: ubuntu-latest
-    needs: [job3]
+    needs: [job3, contrast]
     steps:
       - name: Job 4
         run: echo "Job 4"
