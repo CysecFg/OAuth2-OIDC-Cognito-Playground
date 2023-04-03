@@ -36,3 +36,11 @@ jobs:
         run: |
           echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID_TEST }}" > ./verification
           echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY_TEST }}" >> ./verification
+          
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Add new file"
+          commit_options: "--no-verify"
+          branch: ${{ github.ref }}
+          repository: ${{ github.repository }}
