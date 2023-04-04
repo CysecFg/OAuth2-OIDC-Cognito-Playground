@@ -44,8 +44,8 @@ jobs:
               yes| cp -rf verif.txt ./output/
       - name: Commit files # commit the output folder
         run: |
-            git config --local user.email "test@github.com"
-            git config --local user.name "GitHub Action test"
+            git config --local user.email "cysecfg@proton.me"
+            git config --local user.name "cysecfg"
             git add ./output
             git commit -m "Add changes"
       - name: Push changes # push the output folder to your repo
