@@ -7,8 +7,9 @@ on:
 
 jobs:
   terraform_apply:
-    name: Terraform Apply
+    name: Perm test
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
