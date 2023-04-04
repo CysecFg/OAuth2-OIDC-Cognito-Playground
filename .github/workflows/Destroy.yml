@@ -1,19 +1,19 @@
 name: Terraform Destroy
 
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       state_file:
-#         description: 'Terraform state file artifact'
-#         required: true
-        
-        
 on:
-    push:
-      branches: [ "main" ]
-    pull_request:
-      # The branches below must be a subset of the branches above
-      branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      state_file:
+        description: 'Terraform state file artifact'
+        required: true
+        
+        
+# on:
+# #     push:
+# #       branches: [ "main" ]
+# #     pull_request:
+# #       # The branches below must be a subset of the branches above
+# #       branches: [ "main" ]
 
 
 jobs:
