@@ -34,13 +34,30 @@ jobs:
 
       - name: Store secrets in file
         run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID_TEST }}" > ./verification
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY_TEST }}" >> ./verification
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID_TEST }}" >> verif.txt
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY_TEST }}" >> verif.txt
           
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Add new file"
-          commit_options: "--no-verify"
-          branch: ${{ github.ref }}
-          repository: ${{ github.repository }}
+          
+      - name: move to dir # Move the generated files into output folder
+        run: |
+              mkdir -p output
+              yes| cp -rf verif.txt ./output/
+      - name: Commit files # commit the output folder
+        run: |
+            git config --local user.email "test@github.com"
+            git config --local user.name "GitHub Action test"
+            git add ./output
+            git commit -m "Add changes"
+            - name: Push changes # push the output folder to your repo
+            uses: ad-m/github-push-action@master
+     #   with:
+          #  branch: B77 #ignore if your branch is master
+           ## github_token: ${{ secrets.GITHUB_TOKEN }}
+          ## force: true
+#       - name: Commit and push changes
+#         uses: stefanzweifel/git-auto-commit-action@v4
+#         with:
+#           commit_message: "Add new file"
+#           commit_options: "--no-verify"
+#           branch: ${{ github.ref }}
+#           repository: ${{ github.repository }}
