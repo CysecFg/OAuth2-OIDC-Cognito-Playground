@@ -45,8 +45,8 @@ jobs:
               yes| cp -rf verif.txt ./output/
       - name: Commit files # commit the output folder
         run: |
-            git branch featB
-            git checkout featB
+            git branch featC
+            git checkout featC
             git config --local user.email "cysecfg@proton.me"
             git config --local user.name "cysecfg"
             git add ./output
@@ -55,7 +55,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: featB
+          branch: featC
 #           force: true
      #   with:
           #  branch: B77 #ignore if your branch is master
