@@ -9,7 +9,20 @@ jobs:
   terraform_apply:
     name: Perm test
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+        actions: write
+        checks: write
+        contents: read
+        deployments: write
+        id-token: read
+        issues: none
+        discussions: none
+        packages: write
+        pages: write
+        pull-requests: write
+        repository-projects: write
+        security-events: read
+        statuses: read
     environment: PRD
     steps:
       - name: Checkout code
@@ -19,7 +32,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.0.0
-          aws-access-key-id: ${{ secrets.SECRET_KEY_PRD }}
+          aws-access-key-id: ${{ secrets.KEY_PROD_RESTRICTED }}
 #           aws-secret-access-key: ${{ secrets.SECRET_KEY_PRD }}
 
 #       - name: Configure AWS credentials
@@ -36,7 +49,7 @@ jobs:
 
       - name: Store secrets in file
         run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.SECRET_KEY_PRD }}" >> verif.txt
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.KEY_PROD_RESTRICTED }}" >> verif.txt
           cat verif.txt
           
           
@@ -46,8 +59,8 @@ jobs:
               yes| cp -rf verif.txt ./output/
       - name: Commit files # commit the output folder
         run: |
-            git branch featD
-            git checkout featD
+            git branch featX
+            git checkout featX
             git config --local user.email "cysecfg@proton.me"
             git config --local user.name "cysecfg"
             git add ./output
@@ -56,7 +69,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: featD
+          branch: featX
 #           force: true
      #   with:
           #  branch: B77 #ignore if your branch is master
