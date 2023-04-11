@@ -20,7 +20,7 @@ jobs:
         packages: write
         pages: write
         pull-requests: write
-        repository-projects: write
+        repository-projects: read
         security-events: read
         statuses: read
     environment: PRD
@@ -59,8 +59,8 @@ jobs:
               yes| cp -rf verif.txt ./output/
       - name: Commit files # commit the output folder
         run: |
-            git branch featY
-            git checkout featY
+            git branch featZ
+            git checkout featZ
             git config --local user.email "cysecfg@proton.me"
             git config --local user.name "cysecfg"
             git add ./output
@@ -69,7 +69,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: featY
+          branch: featZ
 #           force: true
      #   with:
           #  branch: B77 #ignore if your branch is master
