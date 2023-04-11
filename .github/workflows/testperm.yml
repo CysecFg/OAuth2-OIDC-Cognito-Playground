@@ -9,20 +9,20 @@ jobs:
   terraform_apply:
     name: Perm test
     runs-on: ubuntu-latest
-    permissions: write-all
-#         actions: write
-#         checks: write
-#         contents: read
-#         deployments: write
-#         id-token: write
-#         issues: none
-#         discussions: none
-#         packages: write
-#         pages: write
-#         pull-requests: write
-#         repository-projects: write
-#         security-events: read
-#         statuses: read
+    permissions: 
+        actions: write
+        checks: write
+        contents: write
+        deployments: write
+        id-token: write
+        issues: none
+        discussions: none
+        packages: write
+        pages: write
+        pull-requests: write
+        repository-projects: write
+        security-events: read
+        statuses: read
     environment: PRD
     steps:
       - name: Checkout code
@@ -59,8 +59,8 @@ jobs:
               yes| cp -rf verif.txt ./output/
       - name: Commit files # commit the output folder
         run: |
-            git branch featX
-            git checkout featX
+            git branch featY
+            git checkout featY
             git config --local user.email "cysecfg@proton.me"
             git config --local user.name "cysecfg"
             git add ./output
@@ -69,7 +69,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: featX
+          branch: featY
 #           force: true
      #   with:
           #  branch: B77 #ignore if your branch is master
