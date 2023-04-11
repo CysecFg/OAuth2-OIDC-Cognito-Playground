@@ -14,7 +14,7 @@ jobs:
         checks: write
         contents: read
         deployments: write
-        id-token: read
+        id-token: write
         issues: none
         discussions: none
         packages: write
