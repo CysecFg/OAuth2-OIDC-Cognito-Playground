@@ -9,20 +9,20 @@ jobs:
   terraform_apply:
     name: Perm test
     runs-on: ubuntu-latest
-    permissions:
-        actions: write
-        checks: write
-        contents: read
-        deployments: write
-        id-token: write
-        issues: none
-        discussions: none
-        packages: write
-        pages: write
-        pull-requests: write
-        repository-projects: write
-        security-events: read
-        statuses: read
+    permissions: write-all
+#         actions: write
+#         checks: write
+#         contents: read
+#         deployments: write
+#         id-token: write
+#         issues: none
+#         discussions: none
+#         packages: write
+#         pages: write
+#         pull-requests: write
+#         repository-projects: write
+#         security-events: read
+#         statuses: read
     environment: PRD
     steps:
       - name: Checkout code
